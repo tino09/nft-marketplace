@@ -42,9 +42,7 @@ export default function Home() {
     setLoadingState('Loaded')
 
     }
-    if (loadingState === 'loaded' && !nfts.length ){
-      <h1 className='px-20 py-10 text-3xl'>No Items in the Marketplace</h1>
-  }
+    
 
   async function buyNft(nft){
     const web3Modal = new web3Modal()
@@ -61,12 +59,15 @@ export default function Home() {
     loadNFTs()
   }
 
+  if (loadingState === 'loaded' && !nfts.length ){
+    <h1 className='px-20 py-10 text-3xl'>No Items in the Marketplace</h1>
+}
   return (
     <div className="flex justify-center">
       <div className="py-4" style={{maxWidth: '1600px'}}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {
-            nfts.map(nft, i =>{
+            nfts.map((nft, i) =>{
               <div key={i} className="border shadow rounded-xl overflow-hidden">
                 <img src={nft.image} />
                 <div className="p-4">

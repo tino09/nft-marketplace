@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
-import {Web3Modal} from "web3modal";
+import Web3Modal from "web3modal";
 import {create as ipfsHttpClient} from "ipfs-http-client";
 
 
@@ -14,7 +14,7 @@ import {
   import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
   import Market from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json'
   
-  export default function CreateItem() {
+  export default function CreateItem () {
     const [fileUrl, setFileUrl] = useState(null)
     const [formInput, updateFormInput] = useState({ price: '', name: '', description: '' })
     const router = useRouter()
@@ -30,12 +30,12 @@ import {
         )
         const url = `https://ipfs.infura.io/ipfs/${added.path}`
         setFileUrl(url)
-      } catch (error) {
-        console.log('Error uploading file: ', error)
+      } catch (e) {
+        console.log('Error uploading file: ', e)
       }  
     }
 
-    async function createMarket() {
+    async function CreateItem() {
       const { name, description, price } = formInput
       if (!name || !description || !price || !fileUrl) return
       /* first, upload to IPFS */
@@ -92,7 +92,7 @@ import {
             onChange={e => updateFormInput({ ...formInput, description: e.target.value })}
           />
           <input
-            placeholder="Asset Price in Eth"
+            placeholder="Asset Price in Matic"
             className="mt-2 border rounded p-4"
             onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
           />

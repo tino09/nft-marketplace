@@ -1,7 +1,7 @@
 import { ethers } from "ethers"
 import { useState, useEffect } from "react"
 import axios from "axios"
-import web3Modal from 'web3modal'
+import Web3Modal from 'web3modal'
 
 import {nftaddress, nftmarketaddress} from '../config'
 
@@ -25,10 +25,10 @@ export default function Home() {
     const items = await Promise.all(data.map(async i =>{
       const tokenUri = await tokenContract.tokenURI(i.tokenId)
       const meta = await axios.get(tokenUri)
-      let price = ethers.utils.formatUnits(i.toString(), 'ether')
+      let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
       let item = {
         price,
-        tokenId: i.tokenId.toNumber(),
+        itemId: i.itemId.toNumber(),
         seller: i.seller,
         owner: i.owner,
         image: meta.data.image,
@@ -45,7 +45,7 @@ export default function Home() {
     
 
   async function buyNft(nft){
-    const web3Modal = new web3Modal()
+    const web3Modal = new Web3Modal()
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()

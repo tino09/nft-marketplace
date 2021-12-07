@@ -8,16 +8,22 @@ import {nftaddress, nftmarketaddress} from '../config'
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
 import Market from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json'
 
+let rpcEndpoint = null
+
+if (process.env.NEXT_PUBLIC_WORKSPACE_URL) {
+  rpcEndpoint = process.env.NEXT_PUBLIC_WORKSPACE_URL
+}
+
 export default function Home() {
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
 
   useEffect(()=>{
-    loadNFTs()
+    loadNfts()
   }, [])
 
-  async function loadNFTs(){
-    const provider = new ethers.providers.JsonRpcProvider()
+  async function loadNfts(){
+    const provider = new ethers.providers.JsonRpcProvider(rpcEndpoint)
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
     const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider)
     const data = await marketContract.fetchMarketItems()
@@ -39,7 +45,7 @@ export default function Home() {
       return item
     }))
     setNfts(items)
-    setLoadingState('Loaded')
+    setLoadingState('loaded')
 
     }
     

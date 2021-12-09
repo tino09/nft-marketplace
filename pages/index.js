@@ -2,7 +2,7 @@ import { ethers } from "ethers"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import Web3Modal from 'web3modal'
-
+import giphy from '../images/giphy.gif'
 import {nftaddress, nftmarketaddress} from '../config'
 
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
@@ -93,6 +93,7 @@ export default function Home() {
         </div>
       </div>
       <h1>Home</h1>
+      <img src={giphy} />
     </div>
   )
 }

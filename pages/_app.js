@@ -1,10 +1,12 @@
 import '../styles/globals.css'
 import Link from 'next/link'
+import giphy from '../images/giphy.gif'
 
 function MyApp({ Component, pageProps }) {
   return( 
   <div>
     <nav className="border-b p-6">
+      <img src={giphy} />
     <p className-="text-4xl font-bold"> Genius Marketplace</p>
 
     <div className="flex mt-4">
